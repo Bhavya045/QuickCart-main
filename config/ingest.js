@@ -5,7 +5,7 @@ import User from "@/model/User";
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: "Quickcart-next" });
 // Ingest function to save user data to a database
-export const syncUserCreation = inngest.createfunction(
+export const syncUserCreation = inngest.createFunction(
     {
         id: 'sync-user-from-clerk'
     },
@@ -15,7 +15,7 @@ export const syncUserCreation = inngest.createfunction(
             const{id,first_name, last_name, email_addresses, image_url} = event.data
             const userData ={
                 _id:id,
-                email:email_addresses[0].email_addresses,
+                email:email_addresses[0].email_address,
                 name: first_name + ' ' + last_name,
                 imageURL: image_url
             }
@@ -26,7 +26,7 @@ export const syncUserCreation = inngest.createfunction(
     }
 )
 // Ingest function to update user data in database
-export const syncUserUpdation = inngest.createfunction(
+export const syncUserUpdation = inngest.createFunction(
     {
         id:'update-user-from-clerk'
     },
@@ -37,7 +37,7 @@ export const syncUserUpdation = inngest.createfunction(
          const{id,first_name, last_name, email_addresses, image_url} = event.data
             const userData ={
                 _id:id,
-                email:email_addresses[0].email_addresses,
+                email:email_addresses[0].email_address,
                 name: first_name + ' ' + last_name,
                 imageURL: image_url
             }
@@ -46,7 +46,7 @@ export const syncUserUpdation = inngest.createfunction(
     }
 )
 //Ingest function to delete user from datavase
-export const syncUserdeletion = inngest.createfunction(
+export const syncUserdeletion = inngest.createFunction(
 {
     id:'delete-user-with-clerk'
 },
